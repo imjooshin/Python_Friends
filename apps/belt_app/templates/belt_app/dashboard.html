@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Friends</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+    <style>
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .form-control {
+            display: block;
+            width: 30%;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        .btn {
+            float: left;
+            margin-right: 10px;
+        }
+        .table {
+            width: 60%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+        <h1 class="my-0 mr-md-auto font-weight-heavy">Welcome {{ request.session.name }}!</h1>
+        <nav class="my-2 my-md-0 mr-md-3"> 
+            <a class="p-2" href="/logout">Logout</a>
+        </nav>
+    </div>
+    <h5 class="h3 mb-3 font-weight-heavy">Here is the list of your friends:</h5>
+
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Alias</th>
+            <th>Action</th>
+        </tr>
+        {% for f in friended %}
+        <tr>
+            <td>{{f.alias}}</td>
+            <td>
+                <form action="/user/{{f.id}}" method="POST">
+                    {% csrf_token %}
+                    <input class="btn btn-sm btn-primary" type="submit" value="View Profile">
+                </form>
+                <form action="/unfriend/{{f.id}}" method="POST">
+                    {% csrf_token %}
+                    <input class="btn btn-sm btn-danger" type="submit" value="Remove as Friend">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <hr>
+
+    <h5 class="h3 mb-3 font-weight-heavy">Other Users not on your friend's list:</h5>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Alias</th>
+            <th>Action</th>
+        </tr>
+        {% for u in listallusers %}
+        <tr>
+            <td><a href="/user/{{u.id}}">{{u.name}}</a></td>
+            <td>
+                <form action="/friend/{{ u.id }}" method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-sm btn-primary" type="submit" value="Add as Friend">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>
