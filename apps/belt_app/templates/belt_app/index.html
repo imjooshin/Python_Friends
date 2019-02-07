@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Belt Exam</title>
+    <title>Friends</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet">
+
     <style>
+        * {
+        font-family: 'Do Hyeon', sans-serif;
+        }
         .container {
             padding: 100px;
         }
@@ -30,12 +35,15 @@
             padding: 50px;
             border-radius: 10px;
         }
+        .messages {
+            color: red;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1 class="h1 mb-3 font-weight-normal">Belt Exam</h1><br>
+        <h1 class="h1 mb-3 font-weight-normal">Welcome to Friends!</h1><br>
         <div class="box">
             <h3 class="h3 mb-3 font-weight-normal">Register</h3>
             <form action="/register" method="post">
@@ -46,7 +54,7 @@
                 Password:<input class="form-control" type="password" name="password" placeholder="Password"><br>
                 Confirm PW:<input class="form-control" type="password" name="confirm" placeholder="Confirm Password"><br>
                 Date of Birth:<input class="form-control" type="date" name="dob"><br>
-                <input class="btn btn-lg btn-primary" type="submit" value="Register">
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Register">
             </form>
         </div>
         <div class="login">
@@ -55,7 +63,7 @@
                 {% csrf_token %}
                 Email:<input class="form-control" type="text" name="email" placeholder="Email"><br>
                 Password:<input class="form-control" type="password" name="password" placeholder="Password"><br>
-                <input class="btn btn-lg btn-primary" type="submit" value="Login">
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Login">
             </form>
         </div>
     
